@@ -1,4 +1,5 @@
 import requests
+import time
 
 
 def fetch_localhost_content():
@@ -6,12 +7,14 @@ def fetch_localhost_content():
   try:
     response = requests.get(url)
     response.raise_for_status()  # HTTPエラーがあれば例外を発生
-    print("HTTP Status Code:", response.status_code)
-    print("Content:")
+    # print("HTTP Status Code:", response.status_code)
+    # print("Content:")
     print(response.text)
   except requests.exceptions.RequestException as e:
     print("An error occurred:", e)
 
 
 if __name__ == "__main__":
-  fetch_localhost_content()
+  while True:
+    fetch_localhost_content()
+    time.sleep(0.1)
