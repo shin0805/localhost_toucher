@@ -17,4 +17,4 @@ def fetch_localhost_content():
 if __name__ == "__main__":
   while True:
     fetch_localhost_content()
-    time.sleep(0.1)
+    time.sleep(0.05)
