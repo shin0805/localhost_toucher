@@ -40,7 +40,7 @@ if __name__ == "__main__":
   while True:
     text = fetch_localhost_content()
     nums = extract_numbers(text)
-    angles = [map_to_range(num, 0, 1000, 46, 130) for num in nums]
+    angles = [map_to_range(num, 0, 3000, 46, 130) for num in nums]
     # print(nums)
-    print(angles)
+    print(f"angles: {angles}")
     time.sleep(0.05)
