@@ -1,0 +1,16 @@
+network: 
+    version: 2    
+    renderer: NetworkManager
+    ethernets:
+        eth0:
+            dhcp4: true
+            optional: true
+    wifis:
+        wlan0:
+            dhcp4: true
+            optional: true
+            access-points: 
+                "sethuko_raspberrypi_wifi":
+                    password: "password"
+                    mode: ap
+
