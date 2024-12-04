@@ -33,15 +33,15 @@ def set_angle(angle):
 
 
 def map_to_range(value, src_min, src_max, dst_min, dst_max):
-  return dst_min + (value - src_min) * (dst_max - dst_min) / (src_max - src_min)
+  mapped_value = dst_min + (value - src_min) * (dst_max - dst_min) / (src_max - src_min)
+  return max(dst_min, min(mapped_value, dst_max))
 
 
 if __name__ == "__main__":
   while True:
     text = fetch_localhost_content()
     nums = extract_numbers(text)
-    angles = [map_to_range(num, 0, 3000, 46, 130) for num in nums]
-    set_angle(angles[0])
-    # print(nums)
+    angles = [map_to_range(num, 0, 6000, 46, 130) for num in nums]
+    set_angle(angles[2])
     print(f"angles: {angles}, touchdesigner: {nums}")
     time.sleep(0.05)
