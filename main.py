@@ -29,7 +29,7 @@ def extract_numbers(input_string):
 def set_angle(angle):
   assert 46 <= angle <= 130, '角度は46から130の間でなければなりません'
   pulse_width = (angle / 180) * (2500 - 500) + 500
-  pi.set_servo_pulsewidth(SERVO_PIN, pulse_widh)
+  pi.set_servo_pulsewidth(SERVO_PIN, pulse_width)
 
 
 def map_to_range(value, src_min, src_max, dst_min, dst_max):
