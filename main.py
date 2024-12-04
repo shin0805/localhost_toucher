@@ -41,6 +41,7 @@ if __name__ == "__main__":
     text = fetch_localhost_content()
     nums = extract_numbers(text)
     angles = [map_to_range(num, 0, 3000, 46, 130) for num in nums]
+    set_angle(angles[0])
     # print(nums)
-    print(f"angles: {angles}")
+    print(f"angles: {angles}, touchdesigner: {nums}")
     time.sleep(0.05)
