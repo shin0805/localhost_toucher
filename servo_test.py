@@ -10,11 +10,11 @@ def main():
   t0 = time.time()
   while True:
     palse = int((time.time() - t0) % 10 * 100)
-    palse = 123 - 10
+    palse = 123 - 20
     print(f'{palse}')
     pwm.set_pwm(0, 0, palse)
     time.sleep(1)
-    palse = 590 - 10
+    palse = 590 - 20
     print(f'{palse}')
     pwm.set_pwm(0, 0, palse)
     time.sleep(1)
