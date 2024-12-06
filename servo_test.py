@@ -13,6 +13,11 @@ def main():
     palse = 300
     print(f'{palse}')
     pwm.set_pwm(0, 0, 300)
+    time.sleep(1)
+    palse = 500
+    print(f'{palse}')
+    pwm.set_pwm(0, 0, 500)
+    time.sleep(1)
 
 
 if __name__ == '__main__':
