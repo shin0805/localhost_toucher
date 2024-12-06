@@ -16,7 +16,7 @@ def main():
     pwm.set_pwm(2, 0, palse)
     pwm.set_pwm(4, 0, palse)
     pwm.set_pwm(6, 0, palse)
-    # pwm.set_pwm(8, 0, palse)
+    pwm.set_pwm(8, 0, palse)
     time.sleep(1)
     palse = 590 - 15
     print(f'{palse}')
@@ -24,7 +24,7 @@ def main():
     pwm.set_pwm(2, 0, palse)
     pwm.set_pwm(4, 0, palse)
     pwm.set_pwm(6, 0, palse)
-    # pwm.set_pwm(8, 0, palse)
+    pwm.set_pwm(8, 0, palse)
     time.sleep(1)
 
 
