@@ -14,11 +14,13 @@ def main():
     print(f'{palse}')
     pwm.set_pwm(0, 0, palse)
     pwm.set_pwm(2, 0, palse)
+    pwm.set_pwm(4, 0, palse)
     time.sleep(1)
     palse = 590 - 15
     print(f'{palse}')
     pwm.set_pwm(0, 0, palse)
     pwm.set_pwm(2, 0, palse)
+    pwm.set_pwm(4, 0, palse)
     time.sleep(1)
 
 
