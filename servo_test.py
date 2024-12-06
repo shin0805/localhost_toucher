@@ -12,7 +12,6 @@ def main():
     palse = int((time.time() - t0) % 10 * 100)
     print(f'{palse}')
     pwm.set_pwm(0, 0, palse)
-    time.sleep(1)
 
 
 if __name__ == '__main__':
