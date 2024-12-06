@@ -11,7 +11,7 @@ def set_angle(index, angle):
   pulse_min = 123 - 15
   pulse_max = 590 - 15
   pulse = (angle / 180) * (pulse_max - pulse_min) + pulse_min
-  pwm.set_pwm(index, 0, palse)
+  pwm.set_pwm(index, 0, pulse)
 
 
 def main():
