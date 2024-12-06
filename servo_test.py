@@ -10,7 +10,7 @@ def set_angle(index, angle):
   global pwm
   pulse_min = 123 - 15
   pulse_max = 590 - 15
-  pulse = (angle / 180) * (pulse_max - pulse_min) + pulse_min
+  pulse = int((angle / 180) * (pulse_max - pulse_min) + pulse_min)
   pwm.set_pwm(index, 0, pulse)
 
 
