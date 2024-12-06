@@ -10,8 +10,9 @@ def main():
   t0 = time.time()
   while True:
     palse = int((time.time() - t0) % 10 * 100)
+    palse = 300
     print(f'{palse}')
-    pwm.set_pwm(0, 0, palse)
+    pwm.set_pwm(0, 0, 300)
 
 
 if __name__ == '__main__':
