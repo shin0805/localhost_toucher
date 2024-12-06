@@ -9,7 +9,7 @@ pwm.set_pwm_freq(60)
 def main():
   while True:
     print('0')
-    pwm.set_pwm(0, 0, 150)
+    pwm.set_pwm(0, 0, 0)
     time.sleep(1)
     print('100')
     pwm.set_pwm(0, 0, 100)
