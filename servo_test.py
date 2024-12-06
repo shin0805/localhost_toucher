@@ -12,11 +12,11 @@ def main():
     palse = int((time.time() - t0) % 10 * 100)
     palse = 123 + 40
     print(f'{palse}')
-    pwm.set_pwm(0, 0, 123)
+    pwm.set_pwm(0, 0, palse)
     time.sleep(1)
     palse = 590 + 40
     print(f'{palse}')
-    pwm.set_pwm(0, 0, 590)
+    pwm.set_pwm(0, 0, palse)
     time.sleep(1)
 
 
