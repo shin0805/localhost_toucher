@@ -17,6 +17,12 @@ def main():
     print('200')
     pwm.set_pwm(0, 0, 200)
     time.sleep(1)
+    print('300')
+    pwm.set_pwm(0, 0, 300)
+    time.sleep(1)
+    print('400')
+    pwm.set_pwm(0, 0, 400)
+    time.sleep(1)
 
 
 if __name__ == '__main__':
