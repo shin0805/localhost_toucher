@@ -7,7 +7,7 @@ pi = pigpio.pi()
 
 
 def fetch_localhost_content():
-  url = "http://192.168.10.105:8081"
+  url = "http://192.168.11.102:8081"
   try:
     response = requests.get(url)
     response.raise_for_status()  # HTTPエラーがあれば例外を発生
@@ -47,6 +47,6 @@ if __name__ == "__main__":
     angles[2] = map_to_range(nums[2], 0, 6000, 46, 130)
     angles[3] = map_to_range(nums[3], 0, 6000, 46, 130)
     angles[4] = map_to_range(nums[4], 0, 6000, 46, 130)
-    set_angle(angles[2])
+    # set_angle(angles[2])
     print(f"angles: {angles}, touchdesigner: {nums}")
     time.sleep(0.05)
