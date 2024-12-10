@@ -30,12 +30,6 @@ def extract_numbers(input_string):
   return numbers[-6:]
 
 
-# def set_angle(angle):
-#   assert 46 <= angle <= 130, '角度は46から130の間でなければなりません'
-#   pulse_width = (angle / 180) * (2500 - 500) + 500
-#   pi.set_servo_pulsewidth(SERVO_PIN, pulse_width)
-
-
 def set_angle(index, angle, for_switch=False):
   global pwm
   if not for_switch:
@@ -76,14 +70,11 @@ if __name__ == "__main__":
     elif nums == 0:
       pre_switch = False
     if pre_switch:
-      if now_time - swich_time <= 0.5:
+      if (now_time - swich_time) % 2 <= 0.5:
         set_angle(10, 30)  # スイッチオン
         angles = angles + [30]
       else:
         set_angle(10, 0)  # スイッチオフ
         angles = angles + [0]
-
-    set_angle(10, 30)
-    # set_angle(angles[2])
     print(f"angles: {angles}, touchdesigner: {nums}")
     time.sleep(0.05)
