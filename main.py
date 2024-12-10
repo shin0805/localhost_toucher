@@ -91,3 +91,7 @@ if __name__ == "__main__":
     for i in range(5):
       set_angle(i * 2, 55)
     set_angle(10, SWITCH_OFF_ANGLE)
+  finally:
+    print("------------ Finished! ---------------")
+    for i in range(5):
+      set_angle(i * 2, 55)
