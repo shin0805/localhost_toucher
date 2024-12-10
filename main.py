@@ -1,9 +1,13 @@
 import requests
 import pigpio
 import time
+import Adafruit_PCA9685
 
 SERVO_PIN = 18
 pi = pigpio.pi()
+# PCA9685初期設定
+pwm = Adafruit_PCA9685.PCA9685(busnum=1)
+pwm.set_pwm_freq(60)
 
 
 def fetch_localhost_content():
@@ -26,10 +30,18 @@ def extract_numbers(input_string):
   return numbers[-5:]
 
 
-def set_angle(angle):
-  assert 46 <= angle <= 130, '角度は46から130の間でなければなりません'
-  pulse_width = (angle / 180) * (2500 - 500) + 500
-  pi.set_servo_pulsewidth(SERVO_PIN, pulse_width)
+# def set_angle(angle):
+#   assert 46 <= angle <= 130, '角度は46から130の間でなければなりません'
+#   pulse_width = (angle / 180) * (2500 - 500) + 500
+#   pi.set_servo_pulsewidth(SERVO_PIN, pulse_width)
+
+
+def set_angle(index, angle):
+  global pwm
+  pulse_min = 123 - 15
+  pulse_max = 590 - 15
+  pulse = int((angle / 180) * (pulse_max - pulse_min) + pulse_min)
+  pwm.set_pwm(index, 0, pulse)
 
 
 def map_to_range(value, src_min, src_max, dst_min, dst_max):
@@ -47,6 +59,8 @@ if __name__ == "__main__":
     angles[2] = map_to_range(nums[2], 0, 6000, 46, 130)
     angles[3] = map_to_range(nums[3], 0, 6000, 46, 130)
     angles[4] = map_to_range(nums[4], 0, 6000, 46, 130)
+    for i in range(5):
+      set_angle(i * 2, angles[i])
     # set_angle(angles[2])
     print(f"angles: {angles}, touchdesigner: {nums}")
     time.sleep(0.05)
