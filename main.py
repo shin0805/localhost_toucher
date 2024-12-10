@@ -64,10 +64,10 @@ if __name__ == "__main__":
     angles[4] = map_to_range(nums[4], 0, 6000, 46, 130)
     for i in range(5):
       set_angle(i * 2, angles[i])
-    if not pre_switch and nums[5] == 1:  # 立ち上がりに反応
+    if (not pre_switch) and (nums[5] == 1):  # 立ち上がりに反応
       pre_switch = True
       swich_time = now_time
-    elif nums == 0:
+    elif nums[5] == 0:
       pre_switch = False
     if pre_switch:
       if (now_time - swich_time) % 2 <= 0.5:
