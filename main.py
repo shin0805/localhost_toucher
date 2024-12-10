@@ -59,29 +59,35 @@ if __name__ == "__main__":
   SWITCH_ON_TIME = 0.5  # スイッチオンのための時間 (sec) (動作周期時間よりは短く)
 
   set_angle(10, SWITCH_OFF_ANGLE)
-  while True:
-    now_time = time.time() - start_time
-    text = fetch_localhost_content()
-    nums = extract_numbers(text)
-    angles = [0, 0, 0, 0, 0, 0]
-    angles[0] = map_to_range(nums[0], 0, 6000, 46, 130)  # touch designerのMIN, MAX, サーボのMIN, MAX
-    angles[1] = map_to_range(nums[1], 0, 6000, 46, 130)
-    angles[2] = map_to_range(nums[2], 0, 6000, 46, 130)
-    angles[3] = map_to_range(nums[3], 0, 6000, 46, 130)
-    angles[4] = map_to_range(nums[4], 0, 6000, 46, 130)
+  try:
+    while True:
+      now_time = time.time() - start_time
+      text = fetch_localhost_content()
+      nums = extract_numbers(text)
+      angles = [0, 0, 0, 0, 0, 0]
+      angles[0] = map_to_range(nums[0], 0, 6000, 46, 130)  # touch designerのMIN, MAX, サーボのMIN, MAX
+      angles[1] = map_to_range(nums[1], 0, 6000, 46, 130)
+      angles[2] = map_to_range(nums[2], 0, 6000, 46, 130)
+      angles[3] = map_to_range(nums[3], 0, 6000, 46, 130)
+      angles[4] = map_to_range(nums[4], 0, 6000, 46, 130)
+      for i in range(5):
+        set_angle(i * 2, angles[i])
+      if (not pre_switch) and (nums[5] == 1):  # 立ち上がりに反応
+        pre_switch = True
+        swich_time = now_time
+      elif nums[5] == 0:
+        pre_switch = False
+      if pre_switch:
+        if (now_time - swich_time) % int(SWITCH_CYCLE_TIME) <= SWITCH_ON_TIME:
+          set_angle(10, SWITCH_ON_ANGLE)
+          angles[5] = SWITCH_ON_ANGLE
+        else:
+          set_angle(10, SWITCH_OFF_ANGLE)
+          angles[5] = SWITCH_OFF_ANGLE
+      print(f"angles: {angles}, touchdesigner: {nums}")
+      time.sleep(0.05)
+  except Exception as e:
+    print("------------ Finished! ---------------")
     for i in range(5):
-      set_angle(i * 2, angles[i])
-    if (not pre_switch) and (nums[5] == 1):  # 立ち上がりに反応
-      pre_switch = True
-      swich_time = now_time
-    elif nums[5] == 0:
-      pre_switch = False
-    if pre_switch:
-      if (now_time - swich_time) % int(SWITCH_CYCLE_TIME) <= SWITCH_ON_TIME:
-        set_angle(10, SWITCH_ON_ANGLE)
-        angles[5] = SWITCH_ON_ANGLE
-      else:
-        set_angle(10, SWITCH_OFF_ANGLE)
-        angles[5] = SWITCH_OFF_ANGLE
-    print(f"angles: {angles}, touchdesigner: {nums}")
-    time.sleep(0.05)
+      set_angle(i * 2, 55)
+    set_angle(10, SWITCH_OFF_ANGLE)
