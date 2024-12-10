@@ -87,11 +87,17 @@ if __name__ == "__main__":
       print(f"angles: {angles}, touchdesigner: {nums}")
       time.sleep(0.05)
   except Exception as e:
-    print("------------ Finished! ---------------")
+    print("------------ Finished! サーボを安全な角度にします---------------")
+    for i in range(5):
+      set_angle(i * 2, 55)
+    set_angle(10, SWITCH_OFF_ANGLE)
+  except KeyboardInterrupt:
+    print("------------ Finished! サーボを安全な角度にします---------------")
     for i in range(5):
       set_angle(i * 2, 55)
     set_angle(10, SWITCH_OFF_ANGLE)
   finally:
-    print("------------ Finished! ---------------")
+    print("------------ Finished! サーボを安全な角度にします----------------")
     for i in range(5):
       set_angle(i * 2, 55)
+    set_angle(10, SWITCH_OFF_ANGLE)
