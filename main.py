@@ -26,8 +26,8 @@ def extract_numbers(input_string):
   parts = input_string.split(":")[-1].split(",")
   # Strip whitespace and convert the parts to integers
   numbers = [int(part.strip()) for part in parts if part.strip().isdigit()]
-  # Take the last 5 numbers and return them
-  return numbers[-5:]
+  # Take the last 6 numbers and return them
+  return numbers[-6:]
 
 
 # def set_angle(angle):
@@ -36,12 +36,18 @@ def extract_numbers(input_string):
 #   pi.set_servo_pulsewidth(SERVO_PIN, pulse_width)
 
 
-def set_angle(index, angle):
+def set_angle(index, angle, for_switch=False):
   global pwm
-  pulse_min = 123 - 15
-  pulse_max = 590 - 15
-  pulse = int((angle / 180) * (pulse_max - pulse_min) + pulse_min)
-  pwm.set_pwm(index, 0, pulse)
+  if not for_switch:
+    pulse_min = 123 - 15
+    pulse_max = 590 - 15
+    pulse = int((angle / 180) * (pulse_max - pulse_min) + pulse_min)
+    # pwm.set_pwm(index, 0, pulse)
+  else:
+    pulse_min = 123
+    pulse_max = 614
+    pulse = int((angle / 180) * (pulse_max - pulse_min) + pulse_min)
+    # pwm.set_pwm(index, 0, pulse)
 
 
 def map_to_range(value, src_min, src_max, dst_min, dst_max):
@@ -50,17 +56,34 @@ def map_to_range(value, src_min, src_max, dst_min, dst_max):
 
 
 if __name__ == "__main__":
+  start_time = time.time()
+  pre_switch = False
   while True:
+    now_time = time.time() - start_time
     text = fetch_localhost_content()
     nums = extract_numbers(text)
     angles = [0, 0, 0, 0, 0]
-    angles[0] = map_to_range(nums[0], 0, 6000, 46, 130)
+    angles[0] = map_to_range(nums[0], 0, 6000, 46, 130)  # touch designerのMIN, MAX, サーボのMIN, MAX
     angles[1] = map_to_range(nums[1], 0, 6000, 46, 130)
     angles[2] = map_to_range(nums[2], 0, 6000, 46, 130)
     angles[3] = map_to_range(nums[3], 0, 6000, 46, 130)
     angles[4] = map_to_range(nums[4], 0, 6000, 46, 130)
     for i in range(5):
       set_angle(i * 2, angles[i])
+    if not pre_switch and nums[5] == 1:  # 立ち上がりに反応
+      pre_switch = True
+      swich_time = now_time
+    elif nums == 0:
+      pre_switch = False
+    if pre_switch:
+      if now_time - swich_time <= 0.5:
+        set_angle(10, 30)  # スイッチオン
+        angles = angles + [30]
+      else:
+        set_angle(10, 0)  # スイッチオフ
+        angles = angles + [0]
+
+    set_angle(10, 30)
     # set_angle(angles[2])
     print(f"angles: {angles}, touchdesigner: {nums}")
     time.sleep(0.05)
