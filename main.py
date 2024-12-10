@@ -36,12 +36,12 @@ def set_angle(index, angle, for_switch=False):
     pulse_min = 123 - 15
     pulse_max = 590 - 15
     pulse = int((angle / 180) * (pulse_max - pulse_min) + pulse_min)
-    # pwm.set_pwm(index, 0, pulse)
+    pwm.set_pwm(index, 0, pulse)
   else:
     pulse_min = 123
     pulse_max = 614
     pulse = int((angle / 180) * (pulse_max - pulse_min) + pulse_min)
-    # pwm.set_pwm(index, 0, pulse)
+    pwm.set_pwm(index, 0, pulse)
 
 
 def map_to_range(value, src_min, src_max, dst_min, dst_max):
