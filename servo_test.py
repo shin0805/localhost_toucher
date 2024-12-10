@@ -30,7 +30,7 @@ def main():
     # set_angle(4, angle)
     # set_angle(6, angle)
     # set_angle(8, angle)
-    set_angle(10, angle)
+    set_angle(10, angle, True)
     time.sleep(1)
     angle = 180
     print(f'{angle}')
@@ -39,7 +39,7 @@ def main():
     # set_angle(4, angle)
     # set_angle(6, angle)
     # set_angle(8, angle)
-    set_angle(10, angle)
+    set_angle(10, angle, True)
     time.sleep(1)
 
 
